@@ -28,7 +28,8 @@ const server = app.listen(process.env.PORT,()=>{
 
 const io = socket(server,{
     cors:{
-        origin: "http://localhost:5173",
+        origin: "*", // Allows all origins
+        methods: ["GET", "POST"], // Define allowed HTTP methods (optional, to be specific)
         credentials: true,
     }
 })
