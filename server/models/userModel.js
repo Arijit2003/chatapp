@@ -7,6 +7,10 @@ const userSchema = new mongoose.Schema({
         max: 20,
         unique: true,
     },
+    usertype:{
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
@@ -28,4 +32,4 @@ const userSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model("Users",userSchema)
+module.exports = mongoose.model("users",userSchema)

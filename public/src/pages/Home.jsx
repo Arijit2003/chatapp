@@ -1,19 +1,21 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { allUsersRoute,host } from "../utils/APIRoutes";
+import { allUsersRoute, host } from "../utils/APIRoutes";
 import { useNavigate } from "react-router-dom";
-import Contacts from "../components/Contacts";
-import Welcome from "../components/Welcome";
-import ChatContainer from "../components/ChatContainer";
-import { io } from "socket.io-client";
 
-const Chat = () => {
-  const socket = useRef()
+import { io } from "socket.io-client";
+import Navbar from "../components/Navbar";
+import Chat from "../components/Chat";
+import Dashboard from "./Dashboard";
+
+const Home = () => {
+  const socket = useRef();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [component, setComponent] = useState("chat");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,12 +31,11 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    if(currentUser){
-      socket.current = io(host)
-      socket.current.emit("add-user",currentUser._id)
+    if (currentUser) {
+      socket.current = io(host);
+      socket.current.emit("add-user", currentUser._id);
     }
-  }, [currentUser])
-  
+  }, [currentUser]);
 
   useEffect(() => {
     async function getAllContacts() {
@@ -56,16 +57,19 @@ const Chat = () => {
 
   return (
     <Container>
-      <div className="container">
-        <Contacts
-          contacts={contacts}
-          currentUser={currentUser}
-          changeChat={handleChatChange}
-        />
-        {isLoaded && currentChat === undefined ? (
-          <Welcome currentUser={currentUser} />
+      <Navbar component={component} setComponent={setComponent} />
+      <div>
+        {component == "chat" ? (
+          <Chat
+            contacts={contacts}
+            currentUser={currentUser}
+            handleChatChange={handleChatChange}
+            isLoaded={isLoaded}
+            currentChat={currentChat}
+            socket={socket}
+          />
         ) : (
-          <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />
+          <Dashboard/>
         )}
       </div>
     </Container>
@@ -76,20 +80,10 @@ const Container = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   background-color: #131324;
-  .container {
-    height: 85vh;
-    width: 85vw;
-    background-color: #00000076;
-    display: grid;
-    grid-template-columns: 25% 75%;
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
-      grid-template-cols: 35% 65%;
-    }
-  }
 `;
-export default Chat;
+export default Home;
