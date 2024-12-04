@@ -1,4 +1,4 @@
-export const host = "https://chatapp-c5iy.onrender.com"
+export const host = "https://chatapp-backend-y6bd.onrender.com"
 export const registerRoute = `${host}/api/auth/register`
 export const loginRoute = `${host}/api/auth/login`
 export const setAvatarRoute = `${host}/api/auth/setAvatar`
