@@ -1,0 +1,8 @@
+Current Issues:
+Task List Not Updating: In the Admin Dashboard, when an admin adds a task, it does not immediately reflect in the "Assigned Task List" below.
+
+Task Synchronization Between Dashboards: Tasks added in the Admin Dashboard are not immediately visible in the Employee Dashboard.
+
+Non-Functional Buttons:Buttons in the Employee Dashboard are currently not operational.
+
+New User Visibility in Chat:When a new user is created, they are directly reflected in the "Contacts" section of an already open chat, causing unexpected behavior.
