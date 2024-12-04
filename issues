@@ -6,4 +6,4 @@ Current Issues:
 
 3) Non-Functional Buttons: Buttons in the Employee Dashboard are currently not operational.
 
-4) New User Visibility in Chat: When a new user is created, they are directly reflected in the "Contacts" section of an already open chat, causing unexpected behavior.
+4) New User Invisibility in Chat: When a new user is created, they are not directly reflected in the "Contacts" section of an already open chat, causing unexpected behavior.
